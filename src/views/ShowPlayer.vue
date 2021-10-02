@@ -1,6 +1,18 @@
 <template>
   <div>
-    <h1>Player</h1>
+    <h1>Player List</h1>
+
+    <!-- <div class="container" >
+        <p> Search: <input class="textbox" type="text" v-model="searching"/> </p>
+        <ul>
+            <li v-for="(b, index) in filtereddata" :key='index'> {{b.playerdata}} </li>
+        </ul>
+    </div> -->
+
+
+
+
+
     <div class="row">
       <div class="col-md-4" v-for="playerdata in playerdata" :key=playerdata.id>
         <div class="card text-center" >
@@ -56,6 +68,20 @@ export default {
       playerdata:[],
     };
   },
+  async created(){
+      let response = await axios.get('playerid.json');
+      this.playerid = response.data;
+      console.log("Created");
+  },
+  computed:{
+      filtereddata: function(){
+          let filtered = this.playerid.filter((eachplayerid)=>{
+              return eachplayerid.playerid()
+          })
+          return filtered;
+      }
+  },
+
   mounted : async function() {
     let response = await axios.get(API_URL);
     this.playerdata = response.data;
@@ -100,5 +126,18 @@ export default {
   margin: 0 5px;
 }
 
+.container{
+    margin-top: 40px;
+    justify-items: left;
+}
+
+.container>p{
+    font-size: 10;
+}
+
+.textbox{
+    max-width: 200px;
+    
+}
 </style>
 
