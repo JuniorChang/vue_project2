@@ -42,7 +42,7 @@
       value="boots"
       name = "checkbox-1">
       
-      <img src="../assets/sword.png">
+      
       </b-form-checkbox>
     
     </div>
