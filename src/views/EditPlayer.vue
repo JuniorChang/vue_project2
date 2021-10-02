@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>Editing Player</h1>
-    <table class="table" id="table_id">
+    <h1>Editing {{ JSON.parse(playerdata).name }}</h1>
+    <!-- <table class="table" id="table_id">
       <thead>
         <tr>
           <th>Username</th>
@@ -37,9 +37,9 @@
       <button v-on:click="Editplayer" class="btn btn-success custom_btn1">
         Edit
       </button>
-    </table>
+    </table> -->
     <div class="card">
-      <div class="card-title">Editing {{ JSON.parse(playerdata).name }}</div>
+      
       <div>
         <h6>Name: <input v-model="name" /></h6>
       </div>
@@ -74,9 +74,8 @@
         </select>
       </div>
       <div> 
-        <button v-on:click="Editplayer" class="btn btn-success custom_btn1">
-        Confirm
-      </button>
+        <button v-on:click="Editplayer" class="btn btn-success custom_btn1">Confirm </button>
+        <button v-on:click="Cancel" class="btn btn-danger"> Cancel </button>
       </div>
     </div>
   </div>
@@ -114,6 +113,9 @@ export default {
       );
       this.$router.push('/player');
     },
+    Cancel: async function(){
+        this.$router.push('/player');
+    }
   },
   props: ["playerdata"],
 };
@@ -122,4 +124,8 @@ export default {
 
 
 <style scoped>
+
+.btn {
+    margin:  10px 10px;
+}
 </style>

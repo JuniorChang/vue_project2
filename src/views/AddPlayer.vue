@@ -96,4 +96,7 @@ export default {
 
 
 <style>
+.btn {
+    margin: 10px 10px;
+}
 </style>
