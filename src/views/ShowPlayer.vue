@@ -9,21 +9,51 @@
         </ul>
     </div> -->
 
-
-
-
-
     <div class="row">
-      <div class="col-md-4" v-for="playerdata in playerdata" :key=playerdata.id>
-        <div class="card text-center" >
+      <div
+        class="col-md-4"
+        v-for="playerdata in playerdata"
+        :key="playerdata.id"
+      >
+        <div class="card text-center">
           <div class="card-body">
-            <h4 class="card-title"> Name: {{playerdata.name}} </h4>
-            <p class="">Server: {{playerdata.server}}</p>
-            <p class="">Status: {{playerdata.status}}</p>
-            <p class="">Role: {{playerdata.role}}</p>
-            <p class="">Items: {{playerdata.items}}</p>
-            <button class="btn btn-outline-success"> <router-link :to="{name:'editPlayer', params:{playerdata:JSON.stringify({name: playerdata.name, server: playerdata.server, role:playerdata.role, status: playerdata.status, items:playerdata.items, _id: playerdata._id})}}"> Edit </router-link> </button>
-            <button class="btn btn-danger" v-on:click="deleteplayer(playerdata._id)"> Delete </button>
+            <img
+              class="picbody"
+              src="../assets/squareBanner.jpg"
+              style="width: 100%"
+            />
+            <div class="carddisplay">
+              <h4 class="card-title">Name: {{ playerdata.name }}</h4>
+              <p class="">Server: {{ playerdata.server }}</p>
+              <p class="">Status: {{ playerdata.status }}</p>
+              <p class="">Role: {{ playerdata.role }}</p>
+              <p class="">Items: {{ playerdata.items }}</p>
+              <button class="btn btn-outline-success">
+                <router-link
+                  :to="{
+                    name: 'editPlayer',
+                    params: {
+                      playerdata: JSON.stringify({
+                        name: playerdata.name,
+                        server: playerdata.server,
+                        role: playerdata.role,
+                        status: playerdata.status,
+                        items: playerdata.items,
+                        _id: playerdata._id,
+                      }),
+                    },
+                  }"
+                >
+                  Edit
+                </router-link>
+              </button>
+              <button
+                class="btn btn-danger"
+                v-on:click="deleteplayer(playerdata._id)"
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -62,10 +92,10 @@ const API_URL = "https://jr-wildpath-project2.herokuapp.com/showplayer";
 const update_URL = "http://localhost:3000/showplayer/:id/update";
 
 export default {
-  name: 'playerdata',
-  data: function(){
-    return{
-      playerdata:[],
+  name: "playerdata",
+  data: function () {
+    return {
+      playerdata: [],
     };
   },
   // async created(){
@@ -82,37 +112,32 @@ export default {
   //     }
   // },
 
-  mounted : async function() {
+  mounted: async function () {
     let response = await axios.get(API_URL);
     this.playerdata = response.data;
   },
-  methods:{
+  methods: {
     update: function (playerdata) {
       this.$emit("update-player", playerdata);
     },
     deleteplayer: async function (playerid) {
       console.log(playerid);
       let response = await axios.delete(
-        `http://localhost:3000/showplayer/${playerid}`,
-      )
+        `http://localhost:3000/showplayer/${playerid}`
+      );
       console.log(response);
-      this.$router.go('/player');
-    }
+      this.$router.go("/player");
+    },
   },
 };
-    
-  
-
-
 </script>
 
 <style scoped>
-
 .table {
   max-width: 80vw;
 }
 
-.card-body{
+.card-body {
   margin-top: 10px;
   border-radius: 5px;
 }
@@ -120,25 +145,27 @@ export default {
 .btn:hover {
   color: goldenrod;
   background-color: purple;
-  
 }
 
 .btn {
   margin: 0 5px;
 }
 
-.container{
-    margin-top: 40px;
-    justify-items: left;
+.container {
+  margin-top: 40px;
+  justify-items: left;
 }
 
-.container>p{
-    font-size: 10;
+.container > p {
+  font-size: 10;
 }
 
-.textbox{
-    max-width: 200px;
-    
+.textbox {
+  max-width: 200px;
+}
+
+.carddisplay{
+  margin-top: -300px;
 }
 </style>
 
