@@ -96,22 +96,9 @@ export default {
   data: function () {
     return {
       playerdata: [],
-      playerid: JSON.parse(this.playerdata)._id,
     };
   },
-  // async created(){
-  //     let response = await axios.get('playerid.json');
-  //     this.playerid = response.data;
-  //     console.log("Created");
-  // },
-  // computed:{
-  //     filtereddata: function(){
-  //         let filtered = this.playerid.filter((eachplayerid)=>{
-  //             return eachplayerid.playerid()
-  //         })
-  //         return filtered;
-  //     }
-  // },
+  
 
   mounted: async function () {
     let response = await axios.get(API_URL);
