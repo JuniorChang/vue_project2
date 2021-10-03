@@ -126,7 +126,7 @@ export default {
         `https://jr-wildpath-project2.herokuapp.com/showplayer/${this.playerid}`
       );
       console.log(response);
-      this.$router.go("/player");
+      this.$router.push("/player");
     },
   },
 };
