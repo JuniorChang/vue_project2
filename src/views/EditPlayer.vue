@@ -102,7 +102,7 @@ export default {
   methods: {
     Editplayer: async function () {
       let response = await axios.put(
-        `https://jr-wildpath-project2.herokuapp.com/${this.playerid}/update`,
+        `https://jr-wildpath-project2.herokuapp.com/showplayer/${this.playerid}/update`,
         {
           name: this.name,
           role: this.role,
