@@ -123,7 +123,7 @@ export default {
     deleteplayer: async function (playerid) {
       console.log(playerid);
       let response = await axios.delete(
-        `http://localhost:3000/showplayer/${playerid}`
+        `https://jr-wildpath-project2.herokuapp.com/showplayer/${playerid}`
       );
       console.log(response);
       this.$router.go("/player");
