@@ -88,6 +88,7 @@
 
 <script>
 import axios from "axios";
+import { computed } from '@vue/reactivity';
 const API_URL = "https://jr-wildpath-project2.herokuapp.com/showplayer";
 const update_URL = "http://localhost:3000/showplayer/:id/update";
 
@@ -111,10 +112,12 @@ export default {
     deleteplayer: async function (playerid) {
       console.log(playerid);
       let response = await axios.delete(
-        `https://jr-wildpath-project2.herokuapp.com/showplayer/${this.playerid}`,
+      `https://jr-wildpath-project2.herokuapp.com/showplayer/${playerid}`,
       );
       console.log(response);
-      this.$router.push("/player");
+      this.playerdata = this.playerdata.filter((eachplayerdata)=>{
+        return eachplayerdata._id != playerid
+      })     
     },
   },
 };
