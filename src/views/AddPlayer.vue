@@ -59,7 +59,7 @@
 
 <script>
 import axios from "axios";
-const API_URL = "http://localhost:3000/addplayer";
+const API_URL = "https://jr-wildpath-project2.herokuapp.com/addplayer";
 
 
 
