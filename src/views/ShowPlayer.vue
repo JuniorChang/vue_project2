@@ -58,7 +58,7 @@
 
 <script>
 import axios from "axios";
-const API_URL = "http://localhost:3000/showplayer";
+const API_URL = "https://jr-wildpath-project2.herokuapp.com/showplayer";
 const update_URL = "http://localhost:3000/showplayer/:id/update";
 
 export default {
@@ -68,19 +68,19 @@ export default {
       playerdata:[],
     };
   },
-  async created(){
-      let response = await axios.get('playerid.json');
-      this.playerid = response.data;
-      console.log("Created");
-  },
-  computed:{
-      filtereddata: function(){
-          let filtered = this.playerid.filter((eachplayerid)=>{
-              return eachplayerid.playerid()
-          })
-          return filtered;
-      }
-  },
+  // async created(){
+  //     let response = await axios.get('playerid.json');
+  //     this.playerid = response.data;
+  //     console.log("Created");
+  // },
+  // computed:{
+  //     filtereddata: function(){
+  //         let filtered = this.playerid.filter((eachplayerid)=>{
+  //             return eachplayerid.playerid()
+  //         })
+  //         return filtered;
+  //     }
+  // },
 
   mounted : async function() {
     let response = await axios.get(API_URL);
@@ -114,6 +114,7 @@ export default {
 
 .card-body{
   margin-top: 10px;
+  border-radius: 5px;
 }
 
 .btn:hover {
