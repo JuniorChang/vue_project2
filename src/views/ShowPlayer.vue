@@ -96,6 +96,7 @@ export default {
   data: function () {
     return {
       playerdata: [],
+      playerid: JSON.parse(this.playerdata)._id,
     };
   },
   // async created(){
@@ -123,7 +124,7 @@ export default {
     deleteplayer: async function (playerid) {
       console.log(playerid);
       let response = await axios.delete(
-        `https://jr-wildpath-project2.herokuapp.com/showplayer/${this.playerid}`
+        `https://jr-wildpath-project2.herokuapp.com/showplayer/${this.playerid}`,
       );
       console.log(response);
       this.$router.push("/player");
