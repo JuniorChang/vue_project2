@@ -20,7 +20,7 @@
             <img
               class="picbody"
               src="../assets/squareBanner.jpg"
-              style="width: 100%"
+              style="width: 100%" 
             />
             <div class="carddisplay">
               <h4 class="card-title">Name: {{ playerdata.name }}</h4>
@@ -137,6 +137,11 @@ export default {
   max-width: 80vw;
 }
 
+.card{
+  margin-top: 70px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
 .card-body {
   margin-top: 10px;
   border-radius: 5px;
@@ -166,6 +171,11 @@ export default {
 
 .carddisplay{
   margin-top: -300px;
+}
+
+.picbody{
+  margin-top: -20px;
+  max-height: 370px;
 }
 </style>
 
