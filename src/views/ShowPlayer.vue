@@ -22,15 +22,17 @@
               src="../assets/squareBanner.jpg"
               style="width: 100%" 
             />
+
             <div class="carddisplay">
               <h4 class="card-title">Name: {{ playerdata.name }}</h4>
               <p class="">Server: {{ playerdata.server }}</p>
               <p class="">Status: {{ playerdata.status }}</p>
               <p class="">Role: {{ playerdata.role }}</p>
-              <p class="">Items: {{ playerdata.items.join(" , ") }}</p>
+              <p class="">Items: {{ playerdata.items.join(" ,") }}</p>
               <button class="btn btn-outline-success">
                 <router-link
                   :to="{
+
                     name: 'editPlayer',
                     params: {
                       playerdata: JSON.stringify({
