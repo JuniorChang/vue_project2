@@ -27,7 +27,7 @@
               <p class="">Server: {{ playerdata.server }}</p>
               <p class="">Status: {{ playerdata.status }}</p>
               <p class="">Role: {{ playerdata.role }}</p>
-              <p class="">Items: {{ join.playerdata.items }}</p>
+              <p class="">Items: {{ join.(playerdata.items) }}</p>
               <button class="btn btn-outline-success">
                 <router-link
                   :to="{
