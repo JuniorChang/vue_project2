@@ -1,5 +1,13 @@
 <template>
   <div>
+    
+    <p v-if="errors.length">
+    <b>Please correct the following error(s):</b>
+    <ul>
+      <li v-for="error in errors">{{ error }}</li>
+    </ul>
+  </p>
+
     <div>
       <label> Name: </label>
       <input type="text" v-model="name" />
@@ -35,16 +43,14 @@
         <option value="belt">Belt</option>
       </select>
     </div>
-    <div> 
+    <div>
       <b-form-checkbox
-      id="checkbox-1"
-      v-model="items"
-      value="boots"
-      name = "checkbox-1">
-      
-      
+        id="checkbox-1"
+        v-model="items"
+        value="boots"
+        name="checkbox-1"
+      >
       </b-form-checkbox>
-    
     </div>
     <button v-on:click="processAdd" class="btn btn-success custom_btn1">
       Add
@@ -61,12 +67,11 @@
 import axios from "axios";
 const API_URL = "https://jr-wildpath-project2.herokuapp.com/addplayer";
 
-
-
 export default {
   name: "addplayer",
   data: function () {
     return {
+      errors: [],
       name: "",
       role: [],
       server: [],
@@ -75,20 +80,39 @@ export default {
     };
   },
   methods: {
+    checkForm: function () {
+      
+
+      this.errors = [];
+      if (!this.name) {
+        this.errors.push("Name Required.");
+      }
+      if (this.role.length === 0) {
+        this.errors.push("Role Required");
+      }
+      if (!this.name) {
+        return false;
+      }
+      if (this.role.length == 0) {
+        return false;
+      }
+      return true
+    },
+
     processAdd: async function () {
-      let response = await axios.post(API_URL, {
-        name: this.name,
-        role: this.role,
-        server: this.server,
-        status: this.status,
-        items: this.items,
-      });
-      console.log(response.data);
-      this.$emit("new-player-added");
-      console.log(this.$router);
-      this.$router.push('/player');
-      
-      
+      if (this.checkForm()) {
+        let response = await axios.post(API_URL, {
+          name: this.name,
+          role: this.role,
+          server: this.server,
+          status: this.status,
+          items: this.items,
+        });
+        console.log(response.data);
+        this.$emit("new-player-added");
+        console.log(this.$router);
+        this.$router.push("/player");
+      }
     },
   },
 };
@@ -97,6 +121,6 @@ export default {
 
 <style>
 .btn {
-    margin: 10px 10px;
+  margin: 10px 10px;
 }
 </style>
