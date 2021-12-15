@@ -4,7 +4,7 @@
     <p v-if="errors.length">
     <b>Please correct the following error(s):</b>
     <ul>
-      <li v-for="error in errors">{{ error }}</li>
+      <p v-for="error in errors">{{ error }}</p>
     </ul>
   </p>
 
@@ -90,10 +90,16 @@ export default {
       if (this.role.length === 0) {
         this.errors.push("Role Required");
       }
+      if (this.server.length === 0) {
+        this.errors.push("Server Required");
+      }
       if (!this.name) {
         return false;
       }
       if (this.role.length == 0) {
+        return false;
+      }
+      if (!this.server.length == 0) {
         return false;
       }
       return true

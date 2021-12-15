@@ -2,14 +2,20 @@
   <div>
     <h1>Player List</h1>
 
-    <!-- <div class="container" >
-        <p> Search: <input class="textbox" type="text" v-model="searching"/> </p>
-        <ul>
-            <li v-for="(b, index) in filtereddata" :key='index'> {{b.playerdata}} </li>
-        </ul>
-    </div> -->
+    <div class="container">
+      <p style="text-align: left">
+        Search:
+        <input
+          class="form-control"
+          type="text"
+          @input="search"
+          v-model="searching"
+          placeholder="Enter any name, role, item  "
+        />
+      </p>
+    </div>
 
-    <div class="row">
+    <div class="row filter_main">
       <div
         class="col-md-4"
         v-for="playerdata in playerdata"
@@ -20,7 +26,7 @@
             <img
               class="picbody"
               src="../assets/squareBanner.jpg"
-              style="width: 100%" 
+              style="width: 100%"
             />
 
             <div class="carddisplay">
@@ -32,7 +38,6 @@
               <button class="btn btn-outline-success">
                 <router-link
                   :to="{
-
                     name: 'editPlayer',
                     params: {
                       playerdata: JSON.stringify({
@@ -90,18 +95,18 @@
 
 <script>
 import axios from "axios";
-import { computed } from '@vue/reactivity';
+import { computed } from "@vue/reactivity";
 const API_URL = "https://jr-wildpath-project2.herokuapp.com/showplayer";
 const update_URL = "http://localhost:3000/showplayer/:id/update";
-
+import $ from "jquery";
 export default {
   name: "playerdata",
   data: function () {
     return {
       playerdata: [],
+      searching:"",
     };
   },
-  
 
   mounted: async function () {
     let response = await axios.get(API_URL);
@@ -111,15 +116,22 @@ export default {
     update: function (playerdata) {
       this.$emit("update-player", playerdata);
     },
+
+    search(){
+      var value = this.searching.toLowerCase();
+      $(".filter_main div").filter(function(){
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    },
     deleteplayer: async function (playerid) {
       console.log(playerid);
       let response = await axios.delete(
-      `https://jr-wildpath-project2.herokuapp.com/showplayer/${playerid}`,
+        `https://jr-wildpath-project2.herokuapp.com/showplayer/${playerid}`
       );
       console.log(response);
-      this.playerdata = this.playerdata.filter((eachplayerdata)=>{
-        return eachplayerdata._id != playerid
-      })     
+      this.playerdata = this.playerdata.filter((eachplayerdata) => {
+        return eachplayerdata._id != playerid;
+      });
     },
   },
 };
@@ -130,9 +142,9 @@ export default {
   max-width: 80vw;
 }
 
-.card{
+.card {
   margin-top: 70px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card-body {
@@ -162,11 +174,11 @@ export default {
   max-width: 200px;
 }
 
-.carddisplay{
+.carddisplay {
   margin-top: -300px;
 }
 
-.picbody{
+.picbody {
   margin-top: -20px;
   max-height: 370px;
 }
